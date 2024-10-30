@@ -1,112 +1,240 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Profile Page</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
+            background-color: #00142B;
+            /* Darker navy blue background */
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Custom CSS */
-        .profile-card {
-            transition: transform 0.2s ease;
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
 
-        .profile-card:hover {
-            transform: scale(1.02);
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         .card {
-            transition: transform 0.2s ease;
+            background: #FFF1E6;
+            /* Warmer background for cards */
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
-        .bordered-image {
-            border: 4px solid rgba(249, 115, 22, 0.6);
-            /* Soft orange border */
+        .profile-image {
+            width: 128px;
+            height: 128px;
+            border-radius: 12px;
+            border: 2px solid #FF7F2A;
+            /* Darker orange border */
+            overflow: hidden;
         }
 
-        h2 {
-            border-bottom: 2px solid rgba(249, 115, 22, 0.7);
-            padding-bottom: 4px;
-            margin-bottom: 10px;
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            margin-top: 16px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1A1A1A;
+            /* Darker text */
+        }
+
+        .profile-title {
+            color: #4A4A4A;
+            /* Darker gray */
+            margin-top: 4px;
+        }
+
+        .profile-quote {
+            margin: 16px 0;
+            font-style: italic;
+            color: #333333;
+        }
+
+        .info-box {
+            background: #FFE4D4;
+            /* Warmer pink background */
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .info-label {
+            color: #4A4A4A;
+            font-weight: 600;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            background: #FF7F2A;
+            /* Darker orange for tags */
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(255, 127, 42, 0.2);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: #1A1A1A;
+        }
+
+        .list {
+            list-style: none;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: #333333;
+            padding: 4px 0;
+        }
+
+        .list-item::before {
+            content: "☕";
+            margin-right: 8px;
+            color: #FF7F2A;
+            /* Darker orange for coffee icons */
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
     </style>
 </head>
 
-<body class="bg-gray-800 text-white">
-    <div class="flex flex-col items-center p-6">
-        <!-- Profile Card -->
-        <div class="bg-white text-black rounded-lg shadow-lg p-6 mb-6 w-full max-w-sm profile-card">
-            <div class="flex flex-col items-center">
-                <img alt="Profile picture of a woman wearing headphones"
-                    class="rounded-full mb-4 bordered-image shadow-md" height="100"
-                    src="https://storage.googleapis.com/a1aa/image/p8Fe9S3n7AX7Zych9RK88PfdPZmfCsdzGjxpLB6NK2MZLKXnA.jpg"
-                    width="100" />
-                <h1 class="text-2xl font-bold mb-2">Anastasija Andersone</h1>
-                <p class="text-orange-500 font-semibold">QA Tester</p>
-                <p class="text-center mt-2 px-4">I'm looking for a coffee that will make my day happier.</p>
+<body>
+    <div class="container">
+        <!-- Left Column -->
+        <div class="card profile-section">
+            <div class="profile-image">
+                <img src="" alt="Profile">
             </div>
-            <div class="bg-orange-100 rounded-lg p-4 mt-4 shadow-inner">
-                <p><strong>Age:</strong> 26</p>
-                <p><strong>Status:</strong> Single</p>
-                <p><strong>Location:</strong> Latvia, Riga</p>
-                <p><strong>Occupation:</strong> Professional Marketing</p>
-                <p><strong>Income:</strong> Household $15,000+</p>
-                <p><strong>Education:</strong> Bachelors</p>
-                <div class="flex flex-wrap mt-4">
-                    <span class="bg-orange-500 text-white rounded-full px-3 py-1 text-sm mr-2 mb-2">Proactive</span>
-                    <span class="bg-orange-500 text-white rounded-full px-3 py-1 text-sm mr-2 mb-2">Hardworking</span>
-                    <span class="bg-orange-500 text-white rounded-full px-3 py-1 text-sm mr-2 mb-2">Reliable</span>
-                    <span class="bg-orange-500 text-white rounded-full px-3 py-1 text-sm mr-2 mb-2">Motivated</span>
-                    <span class="bg-orange-500 text-white rounded-full px-3 py-1 text-sm mr-2 mb-2">Creative</span>
+            <h1 class="profile-name">Kyle Kristan Manantan</h1>
+            <p class="profile-title">Full Stack Developer</p>
+            <p class="profile-quote">"HTML CSS JAVASCRIPT PYTHON"
+            </p>
+
+            <div class="info-box">
+                <div class="info-grid">
+                    <span class="info-label">Age:</span>
+                    <span>24</span>
+                    <span class="info-label">Status:</span>
+                    <span>Sngle</span>
+                    <span class="info-label">Location:</span>
+                    <span>Brgy Militar Palayan City</span>
+                    <span class="info-label">Occupation:</span>
+                    <span>Full Stack Developer</span>
+                    <span class="info-label">Income:</span>
+                    <span>No Work for Income</span>
+                    <span class="info-label">Education:</span>
+                    <span>Bachelor of Science in Information Technology</span>
+                </div>
+
+                <div class="tags">
+                    <span class="tag">Persistent</span>
+                    <span class="tag">Time Wasting</span>
+                    <span class="tag">Liar</span>
+                    <span class="tag">Motivated</span>
+                    <span class="tag">Laziness</span>
+                    <span class="tag">Stupid</span>
                 </div>
             </div>
         </div>
 
-        <!-- Additional Info Section -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
-            <div class="bg-orange-100 rounded-lg p-4 card hover:shadow-lg transition-shadow duration-300">
-                <h2 class="text-lg font-bold mb-2">Goals</h2>
-                <ul class="list-disc list-inside">
-                    <li>Get delicious coffee and recharge your energy for the day</li>
-                    <li>Work at the computer in a pleasant atmosphere</li>
-                    <li>Meet with friends in a pleasant environment</li>
+        <!-- Right Column -->
+        <div class="right-column">
+            <div class="card">
+                <h2 class="section-title">Goals</h2>
+                <ul class="list">
+                    <li class="list-item">To finish my portfolio and have an eCommerce website completed by others.</li>
+                    <li class="list-item">Work at the computer, waiting for others to complete tasks for me.</li>
+                    <li class="list-item">Meet with friends and delegate tasks to them.</li>
                 </ul>
             </div>
-            <div class="bg-orange-100 rounded-lg p-4 card hover:shadow-lg transition-shadow duration-300">
-                <h2 class="text-lg font-bold mb-2">Values</h2>
-                <ul class="list-disc list-inside">
-                    <li>Work and life balance</li>
-                    <li>Health and nutrition</li>
-                    <li>Coffee is a morning ritual</li>
+
+            <div class="card">
+                <h2 class="section-title">Values</h2>
+                <ul class="list">
+                    <li class="list-item">I don't want to work independently.</li>
+                    <li class="list-item">Life isn’t important; time is meant to be wasted.</li>
+                    <li class="list-item">Life is persistent.</li>
                 </ul>
             </div>
-            <div class="bg-orange-100 rounded-lg p-4 card hover:shadow-lg transition-shadow duration-300">
-                <h2 class="text-lg font-bold mb-2">Favorite Coffee Shops</h2>
-                <ul class="list-disc list-inside">
-                    <li>Caffeine</li>
-                    <li>McCafe</li>
+
+            <div class="card">
+                <h2 class="section-title">Favorite Drugs</h2>
+                <ul class="list">
+                    <li class="list-item">Unknown, probably weeds.</li>
                 </ul>
             </div>
-            <div class="bg-orange-100 rounded-lg p-4 card hover:shadow-lg transition-shadow duration-300">
-                <h2 class="text-lg font-bold mb-2">Problem-Solving Opportunities</h2>
-                <ul class="list-disc list-inside">
-                    <li>She wishes for fresh and delicious coffee.</li>
-                    <li>She wants a positive atmosphere because that is important for her.</li>
+
+            <div class="card">
+                <h2 class="section-title">Problem-Solving Opportunities</h2>
+                <ul class="list">
+                    <li class="list-item">He prefers to be spoon-fed instructions.</li>
+                    <li class="list-item">He is lazy and prefers others to complete his tasks.</li>
                 </ul>
             </div>
         </div>
     </div>
 </body>
-
-</html>
+</htm>
